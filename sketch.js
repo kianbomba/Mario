@@ -17,20 +17,36 @@ function keyPressed() {
 
 }
 
+/**
+ * @description Called from P5 Library or extended from P5 library
+ * @inheritdoc
+ */
 function draw() {
   background(0);
   human.show();
   human.update();
 
 
-  for (var i = 0; i < pipe.length; i++) {
+
+  var firstCondition,
+      secondCondition,
+      pipeIndex;
+
+  for (var i = 0; i < pipe.length; i++)
+  {
     pipe[i].show();
+    firstCondition = (pipe[i].x + 70) == human.x;
+    secondCondition = (human.x + 50) == pipe[i].x;
 
-
-    if ((pipe[i].x + 70 == human.x || human.x + 50 == pipe[i].x) && pipe[i].short(human) == true ) {
-         //human.x = pipe[i].x - 50;
-         console.log('true')
-       }
+    // grab your pipeIndex in here
+    // with your business logic or whatever it is
+    if ((firstCondition || secondCondition) && pipe[i].short(human) == true )
+    {
+       pipeIndex = i;
+       //human.x = pipe[i].x - 50;
+       console.log('true');
+       break;
+    }
 
     // if (pipe[i].stand(human) == true){
     //   if (human.y > pipe[i].y - 50){
@@ -45,6 +61,9 @@ function draw() {
 
 
      }
+
+    var singlePipe = pipe[pipeIndex];
+    //execute code here
 
     if(keyIsDown (LEFT_ARROW)) {
       human.mmove(LEFT_ARROW);
