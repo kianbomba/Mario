@@ -62,6 +62,9 @@ function draw() {
 
      }
 
+    // Sometimes pipeIndex might not be able to found
+    // therefore, the rest of the code should not execute
+    if (pipeIndex === null) return;
     var singlePipe = pipe[pipeIndex];
     //execute code here
 
